@@ -1,0 +1,136 @@
+﻿@model UserDetailViewModel
+<html>
+<head>
+    <style>
+
+        body {
+            background: #e0e0e0;
+        }
+
+        .wrapper {
+            width: 300px;
+            font-size: 13px;
+            color: black;
+            line-height: 15px;
+            padding: 14px 20px 13px;
+            margin-bottom: 15px;
+            align-items: center;
+            border: 1px solid;
+            border-radius: 3px;
+            background-color: #19875457;
+        }
+
+        .signUp {
+            width: 360px;
+            padding: 8% 0 0;
+            margin: auto;
+            font-family: 'Comfortaa', cursive;
+            border-radius: 50px;
+        }
+
+        .form {
+            position: relative;
+            z-index: 1;
+            background: #FFFFFF;
+            border-radius: 10px;
+            max-width: 400px;
+            margin: 0 auto 100px;
+            padding: 45px;
+            text-align: center;
+            border-radius: 50px;
+            background: #e0e0e0;
+            box-shadow: -11px 11px 22px #bebebe, 11px -11px 22px #ffffff;
+        }
+
+            .form input {
+                outline: 0;
+                background: #e0e0e0;
+                width: 100%;
+                border: 0;
+                border-radius: 5px;
+                margin: 0 0 15px;
+                padding: 15px;
+                box-sizing: border-box;
+                font-size: 14px;
+                font-family: 'Comfortaa', cursive;
+            }
+
+                .form input:focus {
+                    background: #e0e0e0;
+                }
+
+            .form button {
+                font-family: 'Comfortaa', cursive;
+                text-transform: uppercase;
+                outline: 0;
+                background: #e0e0e0;
+                width: 50%;
+                border: 0;
+                border-radius: 5px;
+                padding: 15px;
+                color: #FFFFFF;
+                font-size: 14px;
+                -webkit-transition: all 0.3 ease;
+                transition: all 0.3 ease;
+                cursor: pointer;
+            }
+
+                .form button:active {
+                    background: #395591;
+                }
+    </style>
+</head>
+<body>
+    <h3>
+        Sign Up
+    </h3>
+    <div class="login">
+        <div class="form">
+            <p>welcome to #</p>
+            <form class="login-form" asp-action="SignUp" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @{
+                    if (ViewData["signUp"] != null)
+                    {
+                        <div class="wrapper">
+                            <strong>Başarılı!</strong> Kullanıcı kaydınız oluşturulmuştur.
+                        </div>
+                    }
+                }
+                <div>
+                    <input asp-for="Name" type="text" placeholder="name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div>
+                    <input asp-for="Surname" type="text" placeholder="surname" />
+                    <span asp-validation-for="Surname" class="text-danger"></span>
+                </div>
+                <div>
+                    <input asp-for="Email" type="email" placeholder="email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div>
+                    <input asp-for="Password" type="password" placeholder="password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <span style="font-size:11px; float:inherit;"> Şifreniz<strong> en az 8 karakter</strong> ve <strong>en fazla 30 karakter </strong>olmalı, harf ve rakam içermelidir.</span>
+                <div>
+                    <input asp-for="RePassword" type="password" placeholder="confirm password" />
+                    <span asp-validation-for="RePassword" class="text-danger"></span>
+                </div>
+                <div>
+                    <button type="submit" class="form button"> Sign Up</button>
+                </div>
+
+                <a asp-action="SignIn">Back to Sign</a>
+            </form>
+        </div>
+    </div>
+
+    @section Scripts{
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+</body>
+</html>

@@ -1,0 +1,142 @@
+﻿<html>
+<head>
+    <style>
+        body, header, nav, h1, h3, p {
+            font-family: 'Comfortaa', cursive;
+        }
+
+        body {
+            background: rgb(246, 246, 246);
+            color: #2f2c2c;
+            width: 95%;
+            max-width: 1500px;
+            margin: 0 auto;
+        }
+
+        section {
+            margin: 2rem 1rem;
+        }
+
+        header {
+            background: rgb(246, 246, 246);
+            text-align: center;
+            position: inherit;
+            top: 0;
+            z-index: 1000;
+            width: 95%;
+            max-width: 1500px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1rem;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            margin: 1rem;
+            text-transform: uppercase;
+        }
+
+        nav {
+            all: initial;
+            display: unset;
+            justify-content: space-around;
+            align-items: center;
+            margin-right: 1em;
+        }
+        /* Section One */
+
+        .section-one {
+            margin: 2rem 1rem 0;
+        }
+
+        .header {
+            font-size: 3.5rem;
+        }
+
+        .section-one-paragraph {
+            margin: 2rem 0;
+            width: 80%;
+            max-width: 600px;
+            line-height: 1.5rem;
+        }
+
+        img {
+            width: 300px;
+            height: 300px;
+        }
+
+        /* Section Three */
+        .section-three p {
+            margin: 0 auto;
+            width: 80%;
+            max-width: 700px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-align: center;
+            color: #2f2c2c;
+        }
+
+
+        .sign-in-btn {
+            background: rgb(246, 246, 246);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            text-decoration: none;
+            color: #2f2c2c;
+            font-family: 'Comfortaa', cursive;
+        }
+
+            .sign-in-btn:hover {
+                background: rgb(254,107,254);
+                /* #dd3be2*/
+                color: white;
+            }
+
+        .sign-up-btn {
+            background: rgb(0 0 0 / 13%);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: .8rem;
+            text-decoration: none;
+            color: #2f2c2c;
+            font-family: 'Comfortaa', cursive;
+        }
+
+            .sign-up-btn:hover {
+                color: white;
+            }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="logo">Q Organizasyon</h1>
+        <nav>
+            <a asp-action="SignIn" class="sign-in-btn">Giriş Yap</a>
+            <a asp-action="SignUp" class="sign-up-btn">Kayıt Ol</a>
+        </nav>
+
+    </header>
+
+    <!--Section one-->
+    <section class="section-one">
+        <h3 class="header">Q'la ORGANİZASYON Planla</h3>
+        <p class="section-one-paragraph">Projelere kapsamlı ve metodik yaklaşım ile büyük fikirler profesyonellik ile birleşir. Yaratıcılığımız ve tecrübemizle her zaman başarılı olma yolundayız</p>
+
+    </section>
+
+    <!--Section two-->
+    <section class="section-two">
+        <img src="~/images/ffffffffff-min.jpg" />
+    </section>
+
+    <!--Section three-->
+    @* <section class="section-three">
+    <p>İletişime geçin ve hayalinizdeki deneyimi hayata geçirin</p>
+    </section>*@
+
+</body>
+</html>
+

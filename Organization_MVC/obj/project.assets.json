@@ -2041,11 +2041,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Asus\\Desktop\\MyWork.NetCore\\20230324_Project\\Organization_MVC\\Organization_MVC.csproj",
+      "projectUniqueName": "C:\\Users\\Asus\\Desktop\\Github\\20230324_Project\\Organization_MVC\\Organization_MVC.csproj",
       "projectName": "Organization_MVC",
-      "projectPath": "C:\\Users\\Asus\\Desktop\\MyWork.NetCore\\20230324_Project\\Organization_MVC\\Organization_MVC.csproj",
+      "projectPath": "C:\\Users\\Asus\\Desktop\\Github\\20230324_Project\\Organization_MVC\\Organization_MVC.csproj",
       "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Asus\\Desktop\\MyWork.NetCore\\20230324_Project\\Organization_MVC\\obj\\",
+      "outputPath": "C:\\Users\\Asus\\Desktop\\Github\\20230324_Project\\Organization_MVC\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2062,8 +2062,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Asus\\Desktop\\MyWork.NetCore\\20230324_Project\\Organization_Model\\Organization_Model.csproj": {
-              "projectPath": "C:\\Users\\Asus\\Desktop\\MyWork.NetCore\\20230324_Project\\Organization_Model\\Organization_Model.csproj"
+            "C:\\Users\\Asus\\Desktop\\Github\\20230324_Project\\Organization_Model\\Organization_Model.csproj": {
+              "projectPath": "C:\\Users\\Asus\\Desktop\\Github\\20230324_Project\\Organization_Model\\Organization_Model.csproj"
             }
           }
         }

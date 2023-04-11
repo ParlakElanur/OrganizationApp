@@ -12,3 +12,17 @@ C:\Users\Asus\Desktop\MyWork.NetCore\20230324_Project\Organization_Model\obj\Deb
 C:\Users\Asus\Desktop\MyWork.NetCore\20230324_Project\Organization_Model\obj\Debug\net6.0\Organization_Model.pdb
 C:\Users\Asus\Desktop\MyWork.NetCore\20230324_Project\Organization_Model\obj\Debug\net6.0\Organization_Model.genruntimeconfig.cache
 C:\Users\Asus\Desktop\MyWork.NetCore\20230324_Project\Organization_Model\obj\Debug\net6.0\ref\Organization_Model.dll
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_Model\bin\Debug\net6.0\Organization_Model.deps.json
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_Model\bin\Debug\net6.0\Organization_Model.runtimeconfig.json
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_Model\bin\Debug\net6.0\Organization_Model.dll
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_Model\bin\Debug\net6.0\Organization_Model.pdb
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_Model\obj\Debug\net6.0\Organization_Model.csproj.AssemblyReference.cache
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_Model\obj\Debug\net6.0\Organization_Model.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_Model\obj\Debug\net6.0\Organization_Model.AssemblyInfoInputs.cache
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_Model\obj\Debug\net6.0\Organization_Model.AssemblyInfo.cs
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_Model\obj\Debug\net6.0\Organization_Model.csproj.CoreCompileInputs.cache
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_Model\obj\Debug\net6.0\Organization_Model.dll
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_Model\obj\Debug\net6.0\refint\Organization_Model.dll
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_Model\obj\Debug\net6.0\Organization_Model.pdb
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_Model\obj\Debug\net6.0\Organization_Model.genruntimeconfig.cache
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_Model\obj\Debug\net6.0\ref\Organization_Model.dll

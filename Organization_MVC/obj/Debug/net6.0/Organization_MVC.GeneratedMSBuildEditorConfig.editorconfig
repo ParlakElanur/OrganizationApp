@@ -9,53 +9,53 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Organization_MVC
 build_property.RootNamespace = Organization_MVC
-build_property.ProjectDir = C:\Users\Asus\Desktop\MyWork.NetCore\20230324_Project\Organization_MVC\
+build_property.ProjectDir = C:\Users\Asus\Desktop\Github\20230324_Project\Organization_MVC\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Asus\Desktop\MyWork.NetCore\20230324_Project\Organization_MVC
+build_property.MSBuildProjectDirectory = C:\Users\Asus\Desktop\Github\20230324_Project\Organization_MVC
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Asus/Desktop/MyWork.NetCore/20230324_Project/Organization_MVC/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Asus/Desktop/Github/20230324_Project/Organization_MVC/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/MyWork.NetCore/20230324_Project/Organization_MVC/Views/User/Activities.cshtml]
+[C:/Users/Asus/Desktop/Github/20230324_Project/Organization_MVC/Views/User/Activities.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxBY3Rpdml0aWVzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/MyWork.NetCore/20230324_Project/Organization_MVC/Views/User/Create.cshtml]
+[C:/Users/Asus/Desktop/Github/20230324_Project/Organization_MVC/Views/User/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/MyWork.NetCore/20230324_Project/Organization_MVC/Views/User/Index.cshtml]
+[C:/Users/Asus/Desktop/Github/20230324_Project/Organization_MVC/Views/User/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/MyWork.NetCore/20230324_Project/Organization_MVC/Views/User/ListAktivities.cshtml]
+[C:/Users/Asus/Desktop/Github/20230324_Project/Organization_MVC/Views/User/ListAktivities.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMaXN0QWt0aXZpdGllcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/MyWork.NetCore/20230324_Project/Organization_MVC/Views/User/ListCategories.cshtml]
+[C:/Users/Asus/Desktop/Github/20230324_Project/Organization_MVC/Views/User/ListCategories.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMaXN0Q2F0ZWdvcmllcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/MyWork.NetCore/20230324_Project/Organization_MVC/Views/User/SignIn.cshtml]
+[C:/Users/Asus/Desktop/Github/20230324_Project/Organization_MVC/Views/User/SignIn.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxTaWduSW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/MyWork.NetCore/20230324_Project/Organization_MVC/Views/User/SignUp.cshtml]
+[C:/Users/Asus/Desktop/Github/20230324_Project/Organization_MVC/Views/User/SignUp.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxTaWduVXAuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/MyWork.NetCore/20230324_Project/Organization_MVC/Views/_ViewImports.cshtml]
+[C:/Users/Asus/Desktop/Github/20230324_Project/Organization_MVC/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/MyWork.NetCore/20230324_Project/Organization_MVC/Views/_ViewStart.cshtml]
+[C:/Users/Asus/Desktop/Github/20230324_Project/Organization_MVC/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/MyWork.NetCore/20230324_Project/Organization_MVC/Views/Shared/_Layout.cshtml]
+[C:/Users/Asus/Desktop/Github/20230324_Project/Organization_MVC/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-jvhri426cu

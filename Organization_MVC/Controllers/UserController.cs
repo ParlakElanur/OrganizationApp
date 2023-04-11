@@ -59,7 +59,7 @@ namespace Organization_MVC.Controllers
                             Quota = a.Quota
                         }).ToList();
 
-                        return View("Activities", activities);
+                        return RedirectToAction("GetAktivities", user);
                     }
                     else if (user.Role == "admn")
                     {
@@ -110,6 +110,28 @@ namespace Organization_MVC.Controllers
 
             }
             return View();
+        }
+        public IActionResult GetAktivities(User user)
+        {
+            List<ActivityViewModel> activities = context.Activities.Include(c => c.Category).Where(w => w.Status == "C").Select(a => new ActivityViewModel()
+            {
+                ActivityID = a.ActivityID,
+                Name = a.Name,
+                Detail = a.Detail,
+                CategoryName = a.Category.CategoryName,
+                Date = a.Date,
+                ActivityDeadline = a.ActivityDeadline,
+                City = a.City,
+                Address = a.Address,
+                Quota = a.Quota
+            }).ToList();
+            ActivitiesUserViewModel activitiesUser = new ActivitiesUserViewModel()
+            {
+                UserID = user.UserID,
+                ActivityViewModels = activities
+            };
+
+            return View("Activities", activitiesUser);
         }
         public IActionResult ListAktivities()
         {
@@ -227,9 +249,22 @@ namespace Organization_MVC.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Apply(ActivityUserViewModel model)
+        public IActionResult Join(ActivityUserViewModel model)
         {
-            return View();
+            Activity activity = context.Activities.Where(a => a.ActivityID == model.ActivityID).Single();
+            User? user = activity.Users.Where(u => u.UserID == model.UserID).SingleOrDefault();
+            if (user == null)
+            {
+                User entityUser = context.Users.Where(u => u.UserID == model.UserID).Single();
+                activity.Users.Add(entityUser);
+                context.SaveChanges();
+                ViewData["join"] = "successful";
+                return Json("Saved");
+            }
+            else
+            {
+                return Json("NotSaved");
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model List<ActivityViewModel>
+﻿@model ActivitiesUserViewModel
 <html>
 <head>
     <style>
@@ -75,6 +75,21 @@
                 color: white;
             }
 
+        button {
+            background: rgb(0 0 0 / 13%);
+            padding: 10px 20px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            text-decoration: none;
+            color: #2f2c2c;
+            font-family: 'Comfortaa', cursive;
+        }
+
+            button:hover {
+                background: rgb(192,192,192);
+                color: white;
+            }
     </style>
 </head>
 <body>
@@ -117,24 +132,43 @@
             <div class="box">
                 <img style="width:300px; height:150px; filter:grayscale(50%)" src="~/images/CevreEtkinlik.jpg" />
                 <br />
-                <h5 style="background-color:white; margin-top:2rem;">@Model[0].Name</h5>
-                <p>@Model[0].Detail</p>
+                <h5 style="background-color:white; margin-top:2rem;">@Model.ActivityViewModels[0].Name</h5>
+                <p>@Model.ActivityViewModels[0].Detail</p>
                 <hr style="margin-top:70px;" />
-                <p style="color:rgb(135, 135, 135); text-transform: uppercase;margin-right:150px; font-size:0.75rem; ">Son Başvuru:@Model[0].ActivityDeadline.ToString().Substring(0,10)</p>
-                <a href="" class="btn">Başvur</a>
+                <p style="color:rgb(135, 135, 135); text-transform: uppercase;margin-right:150px; font-size:0.75rem; ">Son Başvuru:@Model.ActivityViewModels[0].ActivityDeadline.ToString().Substring(0,10)</p>
+                <button onclick="join(@Model.ActivityViewModels[0].ActivityID,@Model.UserID)">Katıl</button>
             </div>
             <p style="padding:0.7rem;"></p>
             <div class="box">
                 <img style="width:300px; height:150px; filter:grayscale(50%)" src="~/images/DijitalEtkinlik.jpg" />
                 <br />
-                <h5 style="background-color:white; margin-top:2rem;">@Model[1].Name</h5>
-                <p>@Model[1].Detail</p>
+                <h5 style="background-color:white; margin-top:2rem;">@Model.ActivityViewModels[1].Name</h5>
+                <p>@Model.ActivityViewModels[1].Detail</p>
                 <hr style="margin-top:90px;" />
-                <p style="color:rgb(135, 135, 135); text-transform: uppercase;margin-right:150px; font-size:0.75rem; ">Son Başvuru:@Model[1].ActivityDeadline.ToString().Substring(0,10)</p>
-                <a asp-action="Apply" class="btn">Başvur</a>
+                <p style="color:rgb(135, 135, 135); text-transform: uppercase;margin-right:150px; font-size:0.75rem; ">Son Başvuru:@Model.ActivityViewModels[1].ActivityDeadline.ToString().Substring(0,10)</p>
+                <button onclick="join(@Model.ActivityViewModels[1].ActivityID,@Model.UserID)">Katıl</button>
             </div>
         </div>
 
     </div>
+    <script>
+        function join(activityID, userID) {
+            var obj = {
+                ActivityID: activityID,
+                UserID: userID
+            };
+            $.ajax({
+                url: '@Url.Action("Join", "User")',
+                type: 'POST',
+                dataType: 'json',
+                data: obj,
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+
+        }
+
+    </script>
 </body>
 </html>

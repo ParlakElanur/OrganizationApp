@@ -3,6 +3,6 @@
     public class ActivityUserViewModel
     {
         public int ActivityID { get; set; }
-        public string Email { get; set; }
+        public int UserID { get; set; }
     }
 }

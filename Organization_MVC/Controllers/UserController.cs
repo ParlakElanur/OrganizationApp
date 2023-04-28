@@ -258,7 +258,6 @@ namespace Organization_MVC.Controllers
                 User entityUser = context.Users.Where(u => u.UserID == model.UserID).Single();
                 activity.Users.Add(entityUser);
                 context.SaveChanges();
-                ViewData["join"] = "successful";
                 return Json("Saved");
             }
             else

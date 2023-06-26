@@ -1,0 +1,178 @@
+﻿@model List<UserActivityViewModel>
+<html>
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <style>
+        /* Pen-specific styles */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body, h1, h2, h3, h4, h5, h6 {
+            font-family: 'Comfortaa', cursive;
+            background: rgb(246, 246, 246);
+            color: #2f2c2c;
+        }
+
+        h4 {
+            width: 600px;
+        }
+
+        section {
+            color: #2f2c2c;
+        }
+
+        /* Pattern styles */
+        .container {
+            display: table;
+            width: 100%;
+        }
+
+        .left-half {
+            position: absolute;
+            left: 50px;
+            width: 40%;
+            height: 40%
+        }
+
+        .right-half {
+            position: absolute;
+            right: 10%;
+            width: 60%;
+            height: 40%
+        }
+
+        .main {
+            width: 250px;
+            height: 250px;
+        }
+
+        .box {
+            width: 600px;
+            height: 550px;
+            padding: 14px 14px 86px;
+            border: 1px solid rgb(216, 216, 216);
+            border-radius: 4px;
+            margin: 0;
+            background-color: white
+        }
+
+            .box img {
+                border-radius: 4px;
+            }
+
+        .btn {
+            background: rgb(0 0 0 / 13%);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            text-decoration: none;
+            color: #2f2c2c;
+            font-family: 'Comfortaa', cursive;
+        }
+
+            .btn:hover {
+                background: rgb(192,192,192);
+                color: white;
+            }
+
+        button {
+            background: rgb(0 0 0 / 13%);
+            padding: 10px 20px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            text-decoration: none;
+            color: #2f2c2c;
+            font-family: 'Comfortaa', cursive;
+        }
+
+            button:hover {
+                background: rgb(192,192,192);
+                color: white;
+            }
+    </style>
+</head>
+<body>
+    <div style="margin-top:50px; margin-left:200px; margin-right:200px; margin-bottom:auto; height:auto;">
+        <section class="container">
+            <div class="left-half">
+                <img class="main" src="~/images/fff-min.jpg" />
+            </div>
+            <div class="right-half">
+                <br />
+                <h2 style="width:600px;"> Hayalinizdeki deneyimi hayata geçirin!</h2>
+                <h4>İş ortaklarımız ile empati kuran ve planlarına özen gösteren bir ekibiz</h4>
+                <br />
+                <a asp-controller="Activity" asp-action="Create" class="btn">Etkinlik Oluştur</a>
+            </div>
+        </section>
+    </div>
+    <br />
+
+    <div style="width:50%; margin-top:300px; margin-left:250px;">
+        <div style="display:flex; justify-content: center; margin:0px; text-align:center; margin-bottom:400px;">
+
+            @* @{
+            string[] actImages = { "~/images/CevreEtkinlik.jpg", "~/images/DijitalEtkinlik.jpg" };
+            }
+
+            @foreach (var activity in Model)
+            {
+            <div class="box">
+            <img style="width:300px; height:150px; filter:grayscale(50%)" src="@actImages[0]" />
+            <br />
+            <h5 style="background-color:white; margin-top:2rem;">@activity.Name</h5>
+            <p>@activity.Detail</p>
+            <hr style="margin-top:130px;" />
+            <p style="color:rgb(135, 135, 135); text-transform: uppercase;margin-right:150px; font-size:0.75rem; ">Son Başvuru:@activity.ActivityDeadline</p>
+            <a href="" class="apply-btn">Başvur</a>
+            </div>
+            <p style="padding:0.7rem;"></p>
+            }*@
+            <div class="box">
+                <img style="width:300px; height:150px; filter:grayscale(50%)" src="~/images/CevreEtkinlik.jpg" />
+                <br />
+                <h5 style="background-color:white; margin-top:2rem;">@Model[0].Name</h5>
+                <p>@Model[0].Detail</p>
+                <hr style="margin-top:70px;" />
+                <p style="color:rgb(135, 135, 135); text-transform: uppercase;margin-right:150px; font-size:0.75rem; ">Son Başvuru:@Model[0].ActivityDeadline.ToString().Substring(0,10)</p>
+                <button onclick="join(@Model[0].ActivityID,@Model[0].UserID)">Katıl</button>
+            </div>
+            <p style="padding:0.7rem;"></p>
+            <div class="box">
+                <img style="width:300px; height:150px; filter:grayscale(50%)" src="~/images/DijitalEtkinlik.jpg" />
+                <br />
+                <h5 style="background-color:white; margin-top:2rem;">@Model[1].Name</h5>
+                <p>@Model[1].Detail</p>
+                <hr style="margin-top:90px;" />
+                <p style="color:rgb(135, 135, 135); text-transform: uppercase;margin-right:150px; font-size:0.75rem; ">Son Başvuru:@Model[1].ActivityDeadline.ToString().Substring(0,10)</p>
+                <button onclick="join(@Model[1].ActivityID,@Model[1].UserID)">Katıl</button>
+         
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function join(activityID, userID) {
+            var obj = {
+                ActivityID: activityID,
+                UserID: userID
+            };
+            $.ajax({
+                url: '@Url.Action("Join", "User")',
+                type: 'POST',
+                dataType: 'json',
+                data: obj,
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+
+        }
+
+    </script>
+</body>
+</html>
+

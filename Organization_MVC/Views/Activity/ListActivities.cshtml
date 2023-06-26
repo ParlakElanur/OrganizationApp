@@ -1,0 +1,162 @@
+﻿@{
+    Layout = null;
+}
+@model List<ActivityViewModel>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Comfortaa', cursive;
+            background: rgb(246, 246, 246);
+        }
+
+        .fixed-bottom-menu {
+            overflow: hidden;
+            background-color: #FF33CC;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .table {
+            display: table;
+            margin: 0 auto;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            float: left;
+        }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                margin: 5px 10px;
+                text-decoration: none;
+            }
+
+                li a:hover:not(.active) {
+                    background-color: #FE6BFE;
+                    border-radius: 50%;
+                }
+
+        .active {
+            background-color: #FE6BFE;
+            border-radius: 50%;
+            margin-left: 500px;
+        }
+
+        thead tr td {
+            font-weight: bold;
+        }
+
+        .table > tbody > tr > td {
+            line-height: 2.32857143;
+        }
+
+        span {
+            line-height: 20px;
+            height: 20px;
+            width: 20px;
+            border-radius: 30%;
+            position: absolute;
+            background-color: #33BF61;
+            border: 2px solid #33BF61;
+            font-size: 14px;
+            color: #ffffff;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="fixed-bottom-menu">
+        <div class="table">
+            <ul>
+                <li><a class="active" title="Etkinlikler" ><i class="fa fa-home"></i></a></li>
+                <li><a asp-controller="Category" asp-action="List" title="Kategoriler"><i class="fa fa-sliders" aria-hidden="true"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="container" style="width:90%;">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td>Etkinlik Adı</td>
+                    @*<td>Açıklama</td>*@
+                    <td>Kategori</td>
+                    <td>Şehir</td>
+                    <td>Adres</td>
+                    <td>Kontenjan</td>
+                    <td>Tarih</td>
+                    <td>Son Başvuru</td>
+                    <td>Durum</td>
+                </tr>
+
+            </thead>
+            <tbody>
+                @if (Model.Count != 0)
+                {
+                    @foreach (var activity in Model)
+                    {
+                        <tr>
+                            @{
+                                var activityID = activity.ActivityID;
+                            }
+                            <td>@activity.Name</td>
+                            @*<td>@activity.Detail</td>*@
+                            <td>@activity.CategoryName</td>
+                            <td>@activity.City</td>
+                            <td>@activity.Address</td>
+                            <td>@activity.Quota</td>
+                            <td>@activity.Date.ToString().Substring(0,10)</td>
+                            <td>@activity.ActivityDeadline.ToString().Substring(0,10)</td>
+                            <td>
+                                <span>
+                                    @*<a href="" onclick="approve(@activityID)" style="color:white"><i class="fa fa-check" aria-hidden="true"></i></a>*@
+                                    <a asp-controller="Activity" asp-action="Approve" asp-route-id=@activityID style="color:white;"><i class="fa fa-check" aria-hidden="true"></i></a>
+                                    <a asp-controller="Activity" asp-action="Reject" asp-route-id=@activityID style="color:white;"><i style="font-size:24px; color:red;" class="fa fa-remove" aria-hidden="true"></i></a>
+                                    @*<a href="#" onclick="reject(@activityID)" style="color:white;"><i style="font-size:24px; color:red;" class="fa fa-remove" aria-hidden="true"></i></a>*@
+                                </span>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <script>
+        function approve(objID) {
+            var obj = {
+                "ActivityID": objID
+            };
+            console.log(obj);
+            //$.ajax({
+            //    url: '@Url.Action("Update","User")',
+            //    method: 'POST',
+            //    dataType: 'json',
+            //    data: obj,
+            //    success:function(data){
+            //        console.log("Başarılı");
+            //        alert(data);
+            //    }
+            //});
+        }
+    </script>
+</body>
+</html>
+

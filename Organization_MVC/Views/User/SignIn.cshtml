@@ -88,11 +88,12 @@
 <body>
     <div class="login">
         <div class="form">
-            <form class="login-form" method="post" asp-action="SignIn">
+            <form class="login-form" method="post" asp-action="GetActivities">
 
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                @{
-                    if (ViewData["signIn"] != null)
+                @{     
+                    
+                    if (ViewData["signIn"]!=null)
                     {
                         <div class="wrapper">
                             Email adresiniz ve/veya şifreniz hatalı.

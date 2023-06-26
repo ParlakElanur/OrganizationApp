@@ -7,7 +7,20 @@
             background: #e0e0e0;
         }
 
-        .wrapper {
+        .wrapperSuccess {
+            width: 300px;
+            font-size: 13px;
+            color: black;
+            line-height: 15px;
+            padding: 14px 20px 13px;
+            margin-bottom: 15px;
+            align-items: center;
+            border: 1px solid;
+            border-radius: 3px;
+            background-color: #19875457;
+        }
+
+        .wrapperError {
             width: 300px;
             font-size: 13px;
             color: black;
@@ -90,12 +103,12 @@
             <form class="login-form" asp-action="SignUp" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 @{
-                    if (ViewData["signUp"] != null)
+                    if (ViewData["signUp"]!=null)
                     {
-                        <div class="wrapper">
+                        <div class="wrapperSuccess">
                             <strong>Başarılı!</strong> Kullanıcı kaydınız oluşturulmuştur.
                         </div>
-                    }
+                    }                    
                 }
                 <div>
                     <input asp-for="Name" type="text" placeholder="name" />

@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "A4T7pcSiUPVQbTKzdEKei5ua6zuA+Y9UGtnsfWMPxyw=",
+  "Source": "Organization_WebAPI",
+  "BasePath": "_content/Organization_WebAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

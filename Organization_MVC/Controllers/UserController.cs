@@ -2,15 +2,19 @@
 using Microsoft.EntityFrameworkCore;
 using Organization_Model.Models;
 using Organization_MVC.ViewModels;
+using System.Text.Json;
 
 namespace Organization_MVC.Controllers
 {
     public class UserController : Controller
     {
         OrganizationDBContext context;
+        HttpClient httpClient;
         public UserController()
         {
             context = new OrganizationDBContext();
+            httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri("http://localhost:5176");
         }
         [HttpGet]
         public IActionResult Index()
@@ -29,214 +33,64 @@ namespace Organization_MVC.Controllers
             }
             return View();
         }
-        [HttpPost]
-        public IActionResult SignIn(UserViewModel model)
+        public async Task<IActionResult> GetActivities(UserViewModel model) 
         {
-            User? user = context.Users.Include(u => u.UserDetail).SingleOrDefault(u => u.Email == model.Email && u.Password == model.Password);
-            if (user != null)
+            HttpResponseMessage responseMessage = await httpClient.PostAsJsonAsync("User/GetActivities", model);
+
+            if (responseMessage.IsSuccessStatusCode)
             {
-                if (ModelState.IsValid)
+                string data = await responseMessage.Content.ReadAsStringAsync();
+                JsonSerializerOptions options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
+                UserViewModel? viewModel = JsonSerializer.Deserialize<UserViewModel>(data, options);
+                if (viewModel.Role == "admn")
                 {
-                    if (model.Check.Equals("checked"))
+                    HttpResponseMessage responseMessage1 = await httpClient.GetAsync("Activity/ListAdmins");
+                    if (responseMessage1.IsSuccessStatusCode)
                     {
-                        CookieOptions cookieOptions = new CookieOptions();
-                        cookieOptions.MaxAge = TimeSpan.FromMinutes(3);
+                        string data1 = await responseMessage1.Content.ReadAsStringAsync();
+                        List<ActivityViewModel>? adminsActivities = JsonSerializer.Deserialize<List<ActivityViewModel>>(data1, options);
 
-                        Response.Cookies.Append("email", user.Email, cookieOptions);
-                        Response.Cookies.Append("password", user.Password, cookieOptions);
-                    }
-                    if (user.Role == "user")
-                    {
-                        List<ActivityViewModel> activities = context.Activities.Include(c => c.Category).Where(w => w.Status == "C").Select(a => new ActivityViewModel()
-                        {
-                            Name = a.Name,
-                            Detail = a.Detail,
-                            CategoryName = a.Category.CategoryName,
-                            Date = a.Date,
-                            ActivityDeadline = a.ActivityDeadline,
-                            City = a.City,
-                            Address = a.Address,
-                            Quota = a.Quota
-                        }).ToList();
-
-                        return RedirectToAction("GetAktivities", user);
-                    }
-                    else if (user.Role == "admn")
-                    {
-                        return RedirectToAction("ListAktivities");
+                        return View("../Activity/ListActivities", adminsActivities);
                     }
                 }
                 else
                 {
-                    return BadRequest(ModelState);
+                    pID id = new pID()
+                    {
+                        ID = viewModel.UserID
+                    };
+
+                    HttpResponseMessage responseMessage2 = await httpClient.PostAsJsonAsync("Activity/ListUsers", id);
+                    if (responseMessage2.IsSuccessStatusCode)
+                    {
+                        string data2 = await responseMessage2.Content.ReadAsStringAsync();
+                        List<UserActivityViewModel>? usersActivities = JsonSerializer.Deserialize<List<UserActivityViewModel>>(data2, options);
+
+                        return View("../Activity/Activities", usersActivities);
+                    }
+
                 }
             }
             ViewData["signIn"] = "unSuccessful";
-            return View();
+            return View("SignIn");
         }
         [HttpGet]
         public IActionResult SignUp()
         {
             return View();
         }
-        [HttpPost]
-        public IActionResult SignUp(UserDetailViewModel model)
+        public async Task<IActionResult> SignUp(UserDetailViewModel model)
         {
-            User? eUser = context.Users.SingleOrDefault(u => u.Email == model.Email);
-
-            if (eUser == null)
+            HttpResponseMessage responseMessage = await httpClient.PostAsJsonAsync("User/SignUp", model);
+            if (responseMessage.IsSuccessStatusCode)
             {
-                if (ModelState.IsValid)
-                {
-                    User user = new User()
-                    {
-                        Email = model.Email,
-                        Password = model.Password,
-                        Role = "user",
-                        UserDetail = new UserDetail()
-                        {
-                            Name = model.Name,
-                            Surname = model.Surname
-                        }
-                    };
-                    context.Users.Add(user);
-                    context.SaveChanges();
-                    ViewData["signUp"] = "successful";
-                }
-                else
-                {
-                    return BadRequest(ModelState);
-                }
-
+                string data = await responseMessage.Content.ReadAsStringAsync();
+                JsonSerializerOptions options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
+                UserDetailViewModel? user = JsonSerializer.Deserialize<UserDetailViewModel>(data, options);
+                ViewData["signUp"] = "successful";
+                return View(user);
             }
             return View();
-        }
-        public IActionResult GetAktivities(User user)
-        {
-            List<ActivityViewModel> activities = context.Activities.Include(c => c.Category).Where(w => w.Status == "C").Select(a => new ActivityViewModel()
-            {
-                ActivityID = a.ActivityID,
-                Name = a.Name,
-                Detail = a.Detail,
-                CategoryName = a.Category.CategoryName,
-                Date = a.Date,
-                ActivityDeadline = a.ActivityDeadline,
-                City = a.City,
-                Address = a.Address,
-                Quota = a.Quota
-            }).ToList();
-            ActivitiesUserViewModel activitiesUser = new ActivitiesUserViewModel()
-            {
-                UserID = user.UserID,
-                ActivityViewModels = activities
-            };
-
-            return View("Activities", activitiesUser);
-        }
-        public IActionResult ListAktivities()
-        {
-            List<ActivityViewModel> activities = context.Activities.Include(c => c.Category).Where(w => w.Status == "R").Select(a => new ActivityViewModel()
-            {
-                ActivityID = a.ActivityID,
-                Name = a.Name,
-                Detail = a.Detail,
-                CategoryName = a.Category.CategoryName,
-                Date = a.Date,
-                ActivityDeadline = a.ActivityDeadline,
-                City = a.City,
-                Address = a.Address,
-                Quota = a.Quota,
-                Status = a.Status
-            }).ToList();
-            return View(activities);
-        }
-
-        [HttpGet]
-        public IActionResult Create()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Create(ActivityViewModel model)
-        {
-            //if (ModelState.IsValid)
-            //{
-            Activity activity = new Activity()
-            {
-                CategoryID = context.Categories.Single(c => c.CategoryName == model.CategoryName).CategoryID,
-                Name = model.Name,
-                Detail = model.Detail,
-                Date = model.Date,
-                ActivityDeadline = model.ActivityDeadline,
-                City = model.City,
-                Address = model.Address,
-                Quota = model.Quota,
-                Status = "R"
-            };
-            context.Activities.Add(activity);
-            context.SaveChanges();
-            ViewData["create"] = "successful";
-            //}
-            //else
-            //{
-            //    return BadRequest(ModelState);
-            //}
-            return View();
-        }
-        [HttpGet]
-        public IActionResult UpdateActivity(int ID) 
-        {
-            Activity activity = context.Activities.Single(a => a.ActivityID == ID);
-            activity.Status = "C";
-            context.Update(activity);
-            context.SaveChanges();
-            return RedirectToAction("ListAktivities");
-        }
-        [HttpGet]
-        public IActionResult DeleteActivity(int ID) 
-        {
-            Activity activity = context.Activities.Single(a => a.ActivityID == ID);
-            context.Activities.Remove(activity);
-            context.SaveChanges();
-            return RedirectToAction("ListAktivities");
-        }
-        [HttpGet]
-        public IActionResult ListCategories()
-        {
-            List<CategoryViewModel> categories = context.Categories.Select(c => new CategoryViewModel()
-            {
-                Name = c.CategoryName
-            }).ToList();
-
-            return View(categories);
-        }
-
-        [HttpPost]
-        public IActionResult AddCategory(CategoryViewModel model)
-        {
-            Category? c = context.Categories.SingleOrDefault(c => c.CategoryName == model.Name);
-            if (c == null)
-            {
-                Category category = new Category()
-                {
-                    CategoryName = model.Name
-                };
-                context.Categories.Add(category);
-                context.SaveChanges();
-                return Json("Saved");
-            }
-            else
-            {
-                return Json("Not saved");
-            }
-        }
-        [HttpGet]
-        public IActionResult DeleteCategory(string Name)
-        {
-            Category category = context.Categories.Single(c => c.CategoryName == Name);
-            context.Categories.Remove(category);
-            context.SaveChanges();
-            return RedirectToAction("ListCategories");
         }
         [HttpGet]
         public IActionResult UpdateCategory()
@@ -262,6 +116,7 @@ namespace Organization_MVC.Controllers
             }
             else
             {
+
                 return Json("NotSaved");
             }
         }

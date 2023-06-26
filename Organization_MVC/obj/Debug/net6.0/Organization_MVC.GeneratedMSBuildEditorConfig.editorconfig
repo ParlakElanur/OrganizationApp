@@ -16,28 +16,28 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\Asus\Desktop\Github\20230324_Project\Organization_MVC
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/Asus/Desktop/Github/20230324_Project/Organization_MVC/Views/Activity/Activities.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0aXZpdHlcQWN0aXZpdGllcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Asus/Desktop/Github/20230324_Project/Organization_MVC/Views/Activity/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0aXZpdHlcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Asus/Desktop/Github/20230324_Project/Organization_MVC/Views/Activity/ListActivities.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWN0aXZpdHlcTGlzdEFjdGl2aXRpZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Asus/Desktop/Github/20230324_Project/Organization_MVC/Views/Category/ListCategories.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2F0ZWdvcnlcTGlzdENhdGVnb3JpZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Asus/Desktop/Github/20230324_Project/Organization_MVC/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Asus/Desktop/Github/20230324_Project/Organization_MVC/Views/User/Activities.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxBY3Rpdml0aWVzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Asus/Desktop/Github/20230324_Project/Organization_MVC/Views/User/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDcmVhdGUuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/Asus/Desktop/Github/20230324_Project/Organization_MVC/Views/User/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Asus/Desktop/Github/20230324_Project/Organization_MVC/Views/User/ListAktivities.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMaXN0QWt0aXZpdGllcy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/Asus/Desktop/Github/20230324_Project/Organization_MVC/Views/User/ListCategories.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMaXN0Q2F0ZWdvcmllcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Asus/Desktop/Github/20230324_Project/Organization_MVC/Views/User/SignIn.cshtml]

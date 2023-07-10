@@ -10,7 +10,7 @@ namespace Organization_Model.Models
     {
         public Activity()
         {
-            Users = new HashSet<User>();
+            ActivityUsers = new HashSet<ActivityUser>();
         }
         public int ActivityID { get; set; }
         public int CategoryID { get; set; }
@@ -22,7 +22,7 @@ namespace Organization_Model.Models
         public string Address { get; set; }
         public int Quota { get; set; }
         public string Status { get; set; }
-        public ICollection<User> Users { get; set; }
+        public ICollection<ActivityUser> ActivityUsers { get; set; }
         public Category Category { get; set; }
     }
 }

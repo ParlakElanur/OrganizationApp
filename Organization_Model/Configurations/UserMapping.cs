@@ -17,9 +17,6 @@ namespace Organization_Model.Configurations
                    .WithOne(u => u.User)
                    .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasMany(u => u.Activities)
-                   .WithMany(u => u.Users);
-
             User admin = new User()
             {
                 UserID = 1,

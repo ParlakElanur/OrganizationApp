@@ -64,7 +64,7 @@ namespace Organization_WebAPI.Controllers
             {
                 Name = category.CategoryName
             };
-            return Ok(category);
+            return Ok(viewModel);
         }
         [HttpPost]
         [Route("[action]")]

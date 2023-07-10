@@ -5,8 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Organization_Model.Migrations
 {
+    /// <inheritdoc />
     public partial class Initial : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -85,24 +87,24 @@ namespace Organization_Model.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ActivityUser",
+                name: "ActivityUsers",
                 columns: table => new
                 {
-                    ActivitiesActivityID = table.Column<int>(type: "int", nullable: false),
-                    UsersUserID = table.Column<int>(type: "int", nullable: false)
+                    ActivityID = table.Column<int>(type: "int", nullable: false),
+                    UserID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ActivityUser", x => new { x.ActivitiesActivityID, x.UsersUserID });
+                    table.PrimaryKey("PK_ActivityUsers", x => new { x.ActivityID, x.UserID });
                     table.ForeignKey(
-                        name: "FK_ActivityUser_Activities_ActivitiesActivityID",
-                        column: x => x.ActivitiesActivityID,
+                        name: "FK_ActivityUsers_Activities_ActivityID",
+                        column: x => x.ActivityID,
                         principalTable: "Activities",
                         principalColumn: "ActivityID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ActivityUser_Users_UsersUserID",
-                        column: x => x.UsersUserID,
+                        name: "FK_ActivityUsers_Users_UserID",
+                        column: x => x.UserID,
                         principalTable: "Users",
                         principalColumn: "UserID",
                         onDelete: ReferentialAction.Cascade);
@@ -119,9 +121,9 @@ namespace Organization_Model.Migrations
                 column: "CategoryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ActivityUser_UsersUserID",
-                table: "ActivityUser",
-                column: "UsersUserID");
+                name: "IX_ActivityUsers_UserID",
+                table: "ActivityUsers",
+                column: "UserID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_CategoryName",
@@ -136,10 +138,11 @@ namespace Organization_Model.Migrations
                 unique: true);
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ActivityUser");
+                name: "ActivityUsers");
 
             migrationBuilder.DropTable(
                 name: "UserDetails");

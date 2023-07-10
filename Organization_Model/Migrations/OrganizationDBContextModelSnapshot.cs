@@ -17,25 +17,10 @@ namespace Organization_Model.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.11")
+                .HasAnnotation("ProductVersion", "7.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("ActivityUser", b =>
-                {
-                    b.Property<int>("ActivitiesActivityID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UsersUserID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ActivitiesActivityID", "UsersUserID");
-
-                    b.HasIndex("UsersUserID");
-
-                    b.ToTable("ActivityUser");
-                });
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("Organization_Model.Models.Activity", b =>
                 {
@@ -43,7 +28,7 @@ namespace Organization_Model.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ActivityID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ActivityID"));
 
                     b.Property<DateTime>("ActivityDeadline")
                         .HasColumnType("datetime2(7)");
@@ -51,7 +36,7 @@ namespace Organization_Model.Migrations
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasMaxLength(300)
-                        .HasColumnType("varchar(300)");
+                        .HasColumnType("varchar");
 
                     b.Property<int>("CategoryID")
                         .HasColumnType("int");
@@ -59,7 +44,7 @@ namespace Organization_Model.Migrations
                     b.Property<string>("City")
                         .IsRequired()
                         .HasMaxLength(20)
-                        .HasColumnType("varchar(20)");
+                        .HasColumnType("varchar");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2(7)");
@@ -67,12 +52,12 @@ namespace Organization_Model.Migrations
                     b.Property<string>("Detail")
                         .IsRequired()
                         .HasMaxLength(600)
-                        .HasColumnType("varchar(600)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar");
 
                     b.Property<int>("Quota")
                         .HasColumnType("int");
@@ -80,15 +65,31 @@ namespace Organization_Model.Migrations
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasMaxLength(1)
-                        .HasColumnType("varchar(1)");
+                        .HasColumnType("varchar");
 
                     b.HasKey("ActivityID");
 
                     b.HasIndex("CategoryID");
 
-                    b.ToTable("Activities");
+                    b.ToTable("Activities", t =>
+                        {
+                            t.HasCheckConstraint("CK_DateDeadline", "DATEDIFF(DAY,[ActivityDeadline],[Date])>=1");
+                        });
+                });
 
-                    b.HasCheckConstraint("CK_DateDeadline", "DATEDIFF(DAY,[ActivityDeadline],[Date])>=1");
+            modelBuilder.Entity("Organization_Model.Models.ActivityUser", b =>
+                {
+                    b.Property<int>("ActivityID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ActivityID", "UserID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("ActivityUsers");
                 });
 
             modelBuilder.Entity("Organization_Model.Models.Category", b =>
@@ -97,12 +98,12 @@ namespace Organization_Model.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryID"));
 
                     b.Property<string>("CategoryName")
                         .IsRequired()
                         .HasMaxLength(40)
-                        .HasColumnType("varchar(40)");
+                        .HasColumnType("varchar");
 
                     b.HasKey("CategoryID");
 
@@ -118,22 +119,22 @@ namespace Organization_Model.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserID"));
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("Role")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("varchar");
 
                     b.HasKey("UserID");
 
@@ -160,31 +161,16 @@ namespace Organization_Model.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("varchar");
 
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
+                        .HasColumnType("varchar");
 
                     b.HasKey("UserID");
 
                     b.ToTable("UserDetails");
-                });
-
-            modelBuilder.Entity("ActivityUser", b =>
-                {
-                    b.HasOne("Organization_Model.Models.Activity", null)
-                        .WithMany()
-                        .HasForeignKey("ActivitiesActivityID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Organization_Model.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UsersUserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Organization_Model.Models.Activity", b =>
@@ -198,6 +184,25 @@ namespace Organization_Model.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("Organization_Model.Models.ActivityUser", b =>
+                {
+                    b.HasOne("Organization_Model.Models.Activity", "Activity")
+                        .WithMany("ActivityUsers")
+                        .HasForeignKey("ActivityID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Organization_Model.Models.User", "User")
+                        .WithMany("ActivityUsers")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Activity");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Organization_Model.Models.UserDetail", b =>
                 {
                     b.HasOne("Organization_Model.Models.User", "User")
@@ -209,6 +214,11 @@ namespace Organization_Model.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Organization_Model.Models.Activity", b =>
+                {
+                    b.Navigation("ActivityUsers");
+                });
+
             modelBuilder.Entity("Organization_Model.Models.Category", b =>
                 {
                     b.Navigation("Activities");
@@ -216,6 +226,8 @@ namespace Organization_Model.Migrations
 
             modelBuilder.Entity("Organization_Model.Models.User", b =>
                 {
+                    b.Navigation("ActivityUsers");
+
                     b.Navigation("UserDetail")
                         .IsRequired();
                 });

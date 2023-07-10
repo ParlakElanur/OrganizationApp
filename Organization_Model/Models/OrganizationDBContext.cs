@@ -8,16 +8,17 @@ using System.Threading.Tasks;
 
 namespace Organization_Model.Models
 {
-    public class OrganizationDBContext:DbContext
+    public class OrganizationDBContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<UserDetail> UserDetails { get; set; }
         public DbSet<Activity> Activities { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<ActivityUser> ActivityUsers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=.;Database=OrganizationDb;Trusted_Connection=True");
+            optionsBuilder.UseSqlServer("Server=.;Database=OrganizationDB;TrustServerCertificate=True;Trusted_Connection=True");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -25,6 +26,7 @@ namespace Organization_Model.Models
             modelBuilder.ApplyConfiguration(new UserDetailMapping());
             modelBuilder.ApplyConfiguration(new ActivityMapping());
             modelBuilder.ApplyConfiguration(new CategoryMapping());
+            modelBuilder.ApplyConfiguration(new ActivityUserMapping());
         }
     }
 }

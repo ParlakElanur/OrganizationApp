@@ -42,8 +42,8 @@ namespace Organization_WebAPI.Controllers
         }
 
         [HttpPost]
-        [Route("[action]")] 
-        public IActionResult GetActivities(UserViewModel model)   
+        [Route("[action]")]
+        public IActionResult GetActivities(UserViewModel model)
         {
             User? user = context.Users.Include(u => u.UserDetail).SingleOrDefault(u => u.Email == model.Email && u.Password == model.Password);
             if (user != null)
@@ -58,12 +58,12 @@ namespace Organization_WebAPI.Controllers
                 }
                 UserViewModel viewModel = new UserViewModel()
                 {
-                    UserID=user.UserID,
+                    UserID = user.UserID,
                     Email = user.Email,
                     Password = user.Password,
-                    Role=user.Role
+                    Role = user.Role
                 };
-                return Ok(viewModel);  
+                return Ok(viewModel);
             }
             return NotFound();
         }
@@ -99,6 +99,32 @@ namespace Organization_WebAPI.Controllers
                 };
                 return Ok(viewModel);
 
+            }
+            return NoContent();
+        }     
+        
+        [HttpPost]
+        [Route("[action]")]
+        public IActionResult JoinToActivity(ActivityUserViewModel model) 
+        {
+            ActivityUser? entity = context.ActivityUsers.Where(a => a.ActivityID == model.ActivityID && a.UserID==model.UserID).SingleOrDefault();
+            if (entity == null)
+            {
+                ActivityUser activityUser = new ActivityUser()
+                {
+                    ActivityID = model.ActivityID,
+                    UserID = model.UserID
+                };
+                context.ActivityUsers.Add(activityUser);
+                context.SaveChanges();
+
+                ActivityUserViewModel viewModel = new ActivityUserViewModel()
+                {
+                    UserID = model.UserID,
+                    ActivityID = model.ActivityID
+                };
+
+                return Ok(viewModel);
             }
             return NoContent();
         }

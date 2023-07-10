@@ -286,20 +286,22 @@
                 "OldName": oldName,
                 "NewName": newName
             }
+            console.log(category);
 
             if (oldName != newName) {
                 $.ajax({
-                    url:'@Url.Action("Update","Category")',
-                    type:'POST',
-                    dataType:'json',
-                    data:category,
+                    url: '@Url.Action("Update","Category")',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: category,
                     success: function (data) {
                         console.log(data);
+                        location.reload();
                     }
                 });
             }
             else {
-                console.log("eşit");
+                alert("Farklı bir kategori yazın.")
             }
         });
         function deleteCategory(name) {

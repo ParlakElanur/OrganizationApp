@@ -33,7 +33,7 @@ namespace Organization_MVC.Controllers
             }
             return View();
         }
-        public async Task<IActionResult> GetActivities(UserViewModel model) 
+        public async Task<IActionResult> GetActivities(UserViewModel model)
         {
             HttpResponseMessage responseMessage = await httpClient.PostAsJsonAsync("User/GetActivities", model);
 
@@ -92,33 +92,18 @@ namespace Organization_MVC.Controllers
             }
             return View();
         }
-        [HttpGet]
-        public IActionResult UpdateCategory()
+        public async Task<IActionResult> JoinToActivity(ActivityUserViewModel model)
         {
-            //Category category = context.Categories.Single(c => c.CategoryName == );
-            //activity.Status = "C";
-            //context.Categories.Update(category);
-            //context.SaveChanges();
-            //return RedirectToAction("ListAktivities");
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Join(ActivityUserViewModel model)
-        {
-            Activity activity = context.Activities.Where(a => a.ActivityID == model.ActivityID).Single();
-            User? user = activity.Users.Where(u => u.UserID == model.UserID).SingleOrDefault();
-            if (user == null)
-            {
-                User entityUser = context.Users.Where(u => u.UserID == model.UserID).Single();
-                activity.Users.Add(entityUser);
-                context.SaveChanges();
-                return Json("Saved");
-            }
-            else
-            {
+            HttpResponseMessage responseMessage =await httpClient.PostAsJsonAsync("User/JoinToActivity", model);
 
-                return Json("NotSaved");
+            if ((int)responseMessage.StatusCode==204)
+            {
+                ViewData["NotJoined"] = "true";
+                return Json("User not joined");
             }
+            ViewData["Joined"] = "true";
+            return Json("User joined");
         }
+
     }
 }

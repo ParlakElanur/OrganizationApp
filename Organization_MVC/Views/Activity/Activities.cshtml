@@ -91,6 +91,20 @@
                 background: rgb(192,192,192);
                 color: white;
             }
+
+        .wrapper {
+            font-family: 'Comfortaa', cursive;
+            width: 250px;
+            font-size: 13px;
+            color: #d0021b;
+            line-height: 15px;
+            padding: 14px 20px 13px;
+            margin-bottom: 15px;
+            align-items: center;
+            border: 1px solid;
+            border-radius: 3px;
+            background-color: #fff4f6;
+        }
     </style>
 </head>
 <body>
@@ -130,6 +144,7 @@
             </div>
             <p style="padding:0.7rem;"></p>
             }*@
+
             <div class="box">
                 <img style="width:300px; height:150px; filter:grayscale(50%)" src="~/images/CevreEtkinlik.jpg" />
                 <br />
@@ -148,25 +163,27 @@
                 <hr style="margin-top:90px;" />
                 <p style="color:rgb(135, 135, 135); text-transform: uppercase;margin-right:150px; font-size:0.75rem; ">Son Başvuru:@Model[1].ActivityDeadline.ToString().Substring(0,10)</p>
                 <button onclick="join(@Model[1].ActivityID,@Model[1].UserID)">Katıl</button>
-         
+
             </div>
         </div>
+
     </div>
-
-
     <script>
         function join(activityID, userID) {
             var obj = {
                 ActivityID: activityID,
                 UserID: userID
             };
+            console.log(obj);
+
             $.ajax({
-                url: '@Url.Action("Join", "User")',
+                url: '@Url.Action("JoinToActivity", "User")',
                 type: 'POST',
                 dataType: 'json',
                 data: obj,
                 success: function (data) {
                     console.log(data);
+                    location.reload();
                 }
             });
 

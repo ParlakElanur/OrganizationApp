@@ -60,3 +60,17 @@ C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\obj\Debug\net6
 C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\obj\Debug\net6.0\Organization_WebAPI.pdb
 C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\obj\Debug\net6.0\Organization_WebAPI.genruntimeconfig.cache
 C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\obj\Debug\net6.0\ref\Organization_WebAPI.dll
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\bin\Debug\net6.0\Azure.Core.dll
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\bin\Debug\net6.0\Azure.Identity.dll
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\bin\Debug\net6.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\bin\Debug\net6.0\Microsoft.SqlServer.Server.dll
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\bin\Debug\net6.0\System.Memory.Data.dll

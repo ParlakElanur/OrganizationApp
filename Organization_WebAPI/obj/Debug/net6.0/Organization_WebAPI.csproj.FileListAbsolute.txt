@@ -74,3 +74,4 @@ C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\bin\Debug\net6
 C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
 C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\bin\Debug\net6.0\Microsoft.SqlServer.Server.dll
 C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\bin\Debug\net6.0\System.Memory.Data.dll
+C:\Users\Asus\Desktop\Github\20230324_Project\Organization_WebAPI\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

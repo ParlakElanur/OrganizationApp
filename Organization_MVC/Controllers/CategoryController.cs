@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Organization_MVC.ViewModels;
+using System.Net.Http.Headers;
 using System.Text.Json;
 
 namespace Organization_MVC.Controllers
@@ -14,6 +15,9 @@ namespace Organization_MVC.Controllers
         }
         public async Task<IActionResult> Add(CategoryViewModel model)
         {
+            string token = HttpContext.Session.GetString("JWT");
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
             HttpResponseMessage responseMessage = await httpClient.PostAsJsonAsync("Category/Add", model);
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -23,6 +27,9 @@ namespace Organization_MVC.Controllers
         }
         public async Task<IActionResult> Update(CategoryUpdateViewModel model)
         {
+            string token = HttpContext.Session.GetString("JWT");
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
             HttpResponseMessage responseMessage = await httpClient.PostAsJsonAsync("Category/Update", model);
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -32,6 +39,9 @@ namespace Organization_MVC.Controllers
         }
         public async Task<IActionResult> Delete(CategoryViewModel model)
         {
+            string token = HttpContext.Session.GetString("JWT");
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
             HttpResponseMessage responseMessage = await httpClient.PostAsJsonAsync("Category/Delete", model);
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -42,6 +52,9 @@ namespace Organization_MVC.Controllers
         }
         public async Task<IActionResult> List()
         {
+            string token = HttpContext.Session.GetString("JWT");
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
             HttpResponseMessage responseMessage = await httpClient.GetAsync("Category/List");
 
             string data = await responseMessage.Content.ReadAsStringAsync();

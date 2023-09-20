@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Organization_Model.Models;
 using Organization_WebAPI.ViewModels;
@@ -17,6 +18,7 @@ namespace Organization_WebAPI.Controllers
         }
         [HttpGet]
         [Route("[action]")]
+        [Authorize(Roles ="Admin,Member")]
         public IActionResult List()
         {
             List<CategoryViewModel> categories = context.Categories.Select(c => new CategoryViewModel()
@@ -28,6 +30,7 @@ namespace Organization_WebAPI.Controllers
         }
         [HttpPost]
         [Route("[action]")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Add(CategoryViewModel model)
         {
             Category? c = context.Categories.SingleOrDefault(c => c.CategoryName == model.Name);
@@ -52,6 +55,7 @@ namespace Organization_WebAPI.Controllers
         }
         [HttpPost]
         [Route("[action]")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Update(CategoryUpdateViewModel model)
         {
             Category? category = context.Categories.SingleOrDefault(c => c.CategoryName == model.OldName);
@@ -68,6 +72,7 @@ namespace Organization_WebAPI.Controllers
         }
         [HttpPost]
         [Route("[action]")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Delete(CategoryViewModel model)
         {
             Category category = context.Categories.Single(c => c.CategoryName == model.Name);

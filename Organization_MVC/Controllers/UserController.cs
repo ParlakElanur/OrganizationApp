@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Organization_Model.Models;
 using Organization_MVC.ViewModels;
+using System.Net.Http.Headers;
 using System.Text.Json;
 
 namespace Organization_MVC.Controllers
@@ -39,11 +40,24 @@ namespace Organization_MVC.Controllers
 
             if (responseMessage.IsSuccessStatusCode)
             {
+                if (model.Check.Equals("checked"))
+                {
+                    CookieOptions cookieOptions = new CookieOptions();
+                    cookieOptions.MaxAge = TimeSpan.FromDays(30);
+
+                    Response.Cookies.Append("email", model.Email, cookieOptions);
+                    Response.Cookies.Append("password", model.Password, cookieOptions);
+                }
                 string data = await responseMessage.Content.ReadAsStringAsync();
                 JsonSerializerOptions options = new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
-                UserViewModel? viewModel = JsonSerializer.Deserialize<UserViewModel>(data, options);
-                if (viewModel.Role == "admn")
-                {
+                UserViewModelByToken? viewModelByToken = JsonSerializer.Deserialize<UserViewModelByToken>(data, options);
+
+                string token = viewModelByToken.Token;
+                HttpContext.Session.SetString("JWT", token);
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                if (viewModelByToken.Role == "admn")
+                {                   
                     HttpResponseMessage responseMessage1 = await httpClient.GetAsync("Activity/ListAdmins");
                     if (responseMessage1.IsSuccessStatusCode)
                     {
@@ -57,7 +71,7 @@ namespace Organization_MVC.Controllers
                 {
                     pID id = new pID()
                     {
-                        ID = viewModel.UserID
+                        ID = viewModelByToken.UserID
                     };
 
                     HttpResponseMessage responseMessage2 = await httpClient.PostAsJsonAsync("Activity/ListUsers", id);
@@ -71,7 +85,7 @@ namespace Organization_MVC.Controllers
 
                 }
             }
-            ViewData["signIn"] = "unSuccessful";
+            ViewData["signIn"] = "false";
             return View("SignIn");
         }
         [HttpGet]
@@ -94,15 +108,16 @@ namespace Organization_MVC.Controllers
         }
         public async Task<IActionResult> JoinToActivity(ActivityUserViewModel model)
         {
-            HttpResponseMessage responseMessage =await httpClient.PostAsJsonAsync("User/JoinToActivity", model);
+            string token = HttpContext.Session.GetString("JWT");
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            if ((int)responseMessage.StatusCode==204)
+            HttpResponseMessage responseMessage = await httpClient.PostAsJsonAsync("User/JoinToActivity", model);
+
+            if ((int)responseMessage.StatusCode == 204)
             {
-                ViewData["NotJoined"] = "true";
-                return Json("User not joined");
+                return Json("Fail");
             }
-            ViewData["Joined"] = "true";
-            return Json("User joined");
+            return Json("Success");
         }
 
     }

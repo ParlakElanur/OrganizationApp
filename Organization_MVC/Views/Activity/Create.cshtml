@@ -1,4 +1,4 @@
-﻿@model ActivityViewModel
+﻿@model List<CategoryViewModel>
 <html>
 <head>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -60,77 +60,107 @@
 </head>
 <body>
     <div class="container register-form" style="margin-top:12px; border-radius:0.1rem;">
-        <div class="form">
-            <div class="note">
-                <p>Etkinlik oluşturma Formu.</p>
-            </div>
-            <div class="form-content">
-                @{
-                    if (ViewData["create"] != null)
-                    {
-                        <label style="color:black; font-size:20px;"> <i style="color:green;" data-feather="check-square"></i>Etkinlik Başvurunuz Gönderildi.</label>
-                    }
+        <div class="note">
+            <p>Etkinlik oluşturma Formu.</p>
+        </div>
+        <div class="form-content">
+
+            @{
+                if (TempData["create"] != null)
+                {
+                    <label style="color:black; font-size:20px;"> <i style="color:green;" data-feather="check-square"></i>Etkinlik Başvurunuz Gönderildi.</label>
                 }
-                <br />
-                <form method="post" asp-action="Create">
-                    <div class="row">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input asp-for="Name" type="text" class="form-control" placeholder="Etkinlik Adı *" />
-                                <span asp-validation-for=Name class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <textarea asp-for="Detail" rows="3" cols="50" class="form-control" placeholder="Açıklama *"></textarea>
-                                <span asp-validation-for=Detail class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-6" style="max-height:150px;">
-                            <div class="form-group">
-                                <label for="date">Etkinlik tarihi * </label>
-                                <input asp-for="Date" type="date" itemid="date" name="date" required />
-                                <span asp-validation-for=Date class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="date">Son başvuru * </label>
-                                <input asp-for="ActivityDeadline" type="date" itemid="activityDeadline" name="activityDeadline" required />
-                                <span asp-validation-for=ActivityDeadline class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <select asp-for="CategoryName" class="form-control" itemid="categoryName" required>
-                                    <option>Kategori seçiniz *</option>
-                                    <option>Çevre</option>
-                                    <option>Çocuk</option>
-                                    <option>Dijital</option>
-                                    <option>Sosyal</option>
-                                </select>
-                                <span asp-validation-for=CategoryName class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <input asp-for="Quota" type="number" name="quota" class="form-control" min="1" placeholder="Kontenjan *" required />
-                                <span asp-validation-for=Quota class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <input asp-for="City" type="text" class="form-control" placeholder="Şehir *" />
-                                <span asp-validation-for=City class="text-danger"></span>
-                            </div>
-                            <div class="form-group">
-                                <textarea asp-for="Address" rows="3" cols="50" class="form-control" placeholder="Adres *"></textarea>
-                                <span asp-validation-for=Address class="text-danger"></span>
-                            </div>
-                        </div>
-                        <button class="btnSubmit">Gönder</button>
+            }
+
+            <br />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input id="activityName" type="text" class="form-control" placeholder="Etkinlik Adı *" />
+
                     </div>
-                </form>
+                    <div class="form-group">
+                        <textarea id="activityDetail" rows="3" cols="50" class="form-control" placeholder="Açıklama *"></textarea>
+
+                    </div>
+                </div>
+                <div class="col-md-6" style="max-height:150px;">
+                    <div class="form-group">
+                        <label>Etkinlik tarihi * </label>
+                        <input type="date" id="activityDate" name="date" required />
+
+                    </div>
+                    <div class="form-group">
+                        <label>Son başvuru * </label>
+                        <input type="date" id="activityDeadline" name="activityDeadline" required />
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Kategori seçiniz * </label>
+                        <select class="form-control" id="activityCategoryName" required>
+                            <option></option>
+                            @foreach (var category in Model)
+                            {
+                                <option>@category.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" id="activityQuota" name="quota" class="form-control" min="1" placeholder="Kontenjan *" required />
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" id="activityCity" class="form-control" placeholder="Şehir *" />
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="3" id="activityAddress" cols="50" class="form-control" placeholder="Adres *"></textarea>
+                    </div>
+                </div>
+                <button class="btnSubmit" id="btnCreate">Gönder</button>
             </div>
+
         </div>
     </div>
+
     <script>
         feather.replace()
+        $("#btnCreate").click(function () {
+
+            var Name = $('#activityName').val();
+            var Detail = $('#activityDetail').val();
+            var CategoryName = $('#activityCategoryName').val();
+            var Date = $('#activityDate').val();
+            var ActivityDeadline = $('#activityDeadline').val();
+            var City = $('#activityCity').val();
+            var Address = $('#activityAddress').val();
+            var Quota = $('#activityQuota').val();
+
+            var activity = {
+                "Name": Name,
+                "Detail": Detail,
+                "CategoryName": CategoryName,
+                "Date": Date,
+                "ActivityDeadline": ActivityDeadline,
+                "City": City,
+                "Address": Address,
+                "Quota": Quota
+            };
+            console.log(activity);
+            $.ajax({
+                url: '@Url.Action("Create", "Activity")',
+                type: 'POST',
+                dataType: 'json',
+                data: activity,
+                success: function (data) {
+                    console.log(data);
+                    location.reload();
+                }
+            });
+        });
     </script>
 
     @section Scripts{

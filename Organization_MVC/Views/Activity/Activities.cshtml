@@ -123,8 +123,8 @@
         </section>
     </div>
     <br />
-
     <div style="width:50%; margin-top:300px; margin-left:250px;">
+        <label style="color:black; font-size:20px;" id="lblSuccess"></label>
         <div style="display:flex; justify-content: center; margin:0px; text-align:center; margin-bottom:400px;">
 
             @* @{
@@ -183,7 +183,13 @@
                 data: obj,
                 success: function (data) {
                     console.log(data);
-                    location.reload();
+                    if (data == "Success") {
+                        $('#lblSuccess').text("Etkinliğe kaydınız Oluşturulmuştur");
+                    }
+                    else if (data == "Fail") {
+                        $('#lblFail').text(data)
+                    }
+
                 }
             });
 

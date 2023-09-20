@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.IdentityModel.Tokens;
 using Organization_Model.Models;
 using Organization_WebAPI.ViewModels;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace Organization_WebAPI.Controllers
 {
@@ -48,24 +50,51 @@ namespace Organization_WebAPI.Controllers
             User? user = context.Users.Include(u => u.UserDetail).SingleOrDefault(u => u.Email == model.Email && u.Password == model.Password);
             if (user != null)
             {
-                if (model.Check.Equals("checked"))
-                {
-                    CookieOptions cookieOptions = new CookieOptions();
-                    cookieOptions.MaxAge = TimeSpan.FromMinutes(3);
+                //Generate Token
+                SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Convert.FromBase64String("bohrbohrbohrbohrbohrbohrbohrbohr"));
+                SigningCredentials signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-                    Response.Cookies.Append("email", user.Email, cookieOptions);
-                    Response.Cookies.Append("password", user.Password, cookieOptions);
+                List<Claim> claims = new List<Claim>();
+                claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Email));
+
+                if (user.Email == "admin@gmail.com")
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, "Admin"));
                 }
-                UserViewModel viewModel = new UserViewModel()
+                else
+                {
+                    claims.Add(new Claim(ClaimTypes.Role, "Member"));
+                }
+                JwtSecurityToken token = new JwtSecurityToken(
+                    issuer: "localhost",
+                    audience: "localhost",
+                    claims: claims,
+                    expires: DateTime.Now.AddDays(3),
+                    signingCredentials: signingCredentials
+                );
+
+                JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+                string userToken = handler.WriteToken(token);
+
+                UserViewModelByToken viewModelByToken = new UserViewModelByToken()
                 {
                     UserID = user.UserID,
                     Email = user.Email,
                     Password = user.Password,
-                    Role = user.Role
+                    Role = user.Role,
+                    Token = userToken
                 };
-                return Ok(viewModel);
+
+                return Ok(viewModelByToken);
             }
             return NotFound();
+        }
+        [HttpGet]
+        [Route("[action]")]
+        [Authorize(Roles ="Admnin")]
+        public IActionResult Get()
+        {
+            return Ok("Okey");
         }
 
         [HttpPost]
@@ -101,13 +130,14 @@ namespace Organization_WebAPI.Controllers
 
             }
             return NoContent();
-        }     
-        
+        }
+
         [HttpPost]
         [Route("[action]")]
-        public IActionResult JoinToActivity(ActivityUserViewModel model) 
+        [Authorize(Roles ="Member")]
+        public IActionResult JoinToActivity(ActivityUserViewModel model)
         {
-            ActivityUser? entity = context.ActivityUsers.Where(a => a.ActivityID == model.ActivityID && a.UserID==model.UserID).SingleOrDefault();
+            ActivityUser? entity = context.ActivityUsers.Where(a => a.ActivityID == model.ActivityID && a.UserID == model.UserID).SingleOrDefault();
             if (entity == null)
             {
                 ActivityUser activityUser = new ActivityUser()

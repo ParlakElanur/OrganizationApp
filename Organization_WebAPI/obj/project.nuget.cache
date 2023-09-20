@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "cFJvl9Kv471qHZyPkkKI6A7A60lqOL1PmUph9EH4Q2Xt6Bca7vl1YZww0251ifOJtx8nl6AQTLc4fFANDmrD0A==",
+  "dgSpecHash": "GooM7xOhVM4G/TmJzjIn3nU1aj6pfCWiL89V1fn7ciQPx6pCenzBnVcaxLQMxXRBVev6UeEC9sd3+gkjXeB2Ag==",
   "success": true,
   "projectFilePath": "C:\\Users\\Asus\\Desktop\\Github\\20230324_Project\\Organization_WebAPI\\Organization_WebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Asus\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\Asus\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.11\\microsoft.aspnetcore.authentication.jwtbearer.6.0.11.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\microsoft.data.sqlclient\\5.0.2\\microsoft.data.sqlclient.5.0.2.nupkg.sha512",

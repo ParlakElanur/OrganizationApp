@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Organization_Model.Models;
 using Organization_WebAPI.ViewModels;
@@ -16,6 +17,7 @@ namespace Organization_WebAPI.Controllers
         }
         [HttpPost]
         [Route("[action]")]
+        [Authorize(Roles ="Member")]
         public IActionResult Create(ActivityViewModel model)
         {
             Activity activity = new Activity()
@@ -52,6 +54,7 @@ namespace Organization_WebAPI.Controllers
         }
         [HttpPost]
         [Route("[action]")]
+        [Authorize(Roles ="Admin")]
         public IActionResult Approve(pID model)
         {
             Activity activity = context.Activities.Single(a => a.ActivityID == model.ID);
@@ -62,6 +65,7 @@ namespace Organization_WebAPI.Controllers
         }
         [HttpPost]
         [Route("[action]")]
+        [Authorize(Roles ="Admin")]
         public IActionResult Reject(pID model)
 
         {
@@ -73,6 +77,7 @@ namespace Organization_WebAPI.Controllers
         }
         [HttpPost]
         [Route("[action]")]
+        [Authorize(Roles ="Member")]
         public IActionResult ListUsers(pID model)  //List User's Activities
         {
             List<UserActivityViewModel> activities = context.Activities.Include(c => c.Category).Where(w => w.Status == "C").Select(a => new UserActivityViewModel()
@@ -94,6 +99,7 @@ namespace Organization_WebAPI.Controllers
         }
         [HttpGet]
         [Route("[action]")]
+        [Authorize(Roles ="Admin")]
         public IActionResult ListAdmins() //List Admin's Activities
         {
             List<ActivityViewModel> activities = context.Activities.Include(c => c.Category).Where(w => w.Status == "R").Select(a => new ActivityViewModel()

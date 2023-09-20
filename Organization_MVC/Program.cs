@@ -9,6 +9,8 @@ builder.Services.AddControllersWithViews()
                     a.RegisterValidatorsFromAssemblyContaining<Program>();
                 });
 
+builder.Services.AddSession(a=>a.IdleTimeout=TimeSpan.FromHours(1));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -19,6 +21,8 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 
